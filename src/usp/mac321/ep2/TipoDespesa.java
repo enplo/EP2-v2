@@ -1,12 +1,12 @@
 package usp.mac321.ep2;
 
-import java.util.List;
+import java.util.*;
 
 public class TipoDespesa implements TipoOperacao {
 	String nomeDoTipo;
 	boolean sub;
 	TipoDespesa tipoDerivado;
-	List<TipoDespesa> subcategorias;
+	List<TipoDespesa> subcategorias = new ArrayList<TipoDespesa>();
 	
 	TipoDespesa(String n){
 		nomeDoTipo = n;
@@ -54,5 +54,13 @@ public class TipoDespesa implements TipoOperacao {
 		}
 		
 		return nomeDoTipo;
+	}
+
+	public List<TipoDespesa> getListaSubcategorias() {
+		return subcategorias;
+	}
+
+	public void setSub(boolean subcategoria) {
+		sub = subcategoria;		
 	}
 }
