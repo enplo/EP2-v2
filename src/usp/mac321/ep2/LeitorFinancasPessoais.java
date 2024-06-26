@@ -336,13 +336,24 @@ public class LeitorFinancasPessoais implements LeitorFinancasPessoaisDAO {
 	
 	public Usuario getUsuarioFromList(String apelido, List<Usuario> l) throws UsuarioNaoExistenteException {
 		if (l != null){
-		for(Usuario i: l) {
+		for(Usuario i: l) {	
 			if(i.getApelido().equals(apelido)) {
 				return i;
 			}
 		}}
 		throw new UsuarioNaoExistenteException(apelido);
 	}
+
+	public Usuario getUsuarioFromList(String apelido) throws UsuarioNaoExistenteException {
+		if (usuarios != null){
+		for(Usuario i: usuarios) {	
+			if(i.getApelido().equals(apelido)) {
+				return i;
+			}
+		}}
+		throw new UsuarioNaoExistenteException(apelido);
+	}
+
 	
 
 	public static void main(String[] args) {

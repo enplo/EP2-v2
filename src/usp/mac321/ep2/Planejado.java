@@ -5,11 +5,11 @@ import java.util.GregorianCalendar;
 
 public class Planejado implements EstadoLancamento {
     @Override
-    public void setUser(Lancamento lancamento, Usuario u) {
+    public void setUser(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
         lancamento.user = u;
     }
 @   Override
-        public void setData(Lancamento lancamento, int dia, int mes, int ano) {
+        public void setData(Lancamento lancamento, int dia, int mes, int ano, LeitorFinancasPessoais leitor) {
             if (dia <= 0 || mes <= 0 || ano <= 0) {
                 lancamento.mudaEstado(new Invalido());
             } else {
@@ -28,12 +28,12 @@ public class Planejado implements EstadoLancamento {
         }
 
     @Override
-    public void setTipo(Lancamento lancamento, TipoOperacao t) {
+    public void setTipo(Lancamento lancamento, TipoOperacao t, LeitorFinancasPessoais leitor) {
         lancamento.tipo = t;
     }
 
     @Override
-    public void setValor(Lancamento lancamento, double valor) {
+    public void setValor(Lancamento lancamento, double valor, LeitorFinancasPessoais leitor) {
         if (valor < 0) {
             lancamento.mudaEstado(new Invalido());
         } else {

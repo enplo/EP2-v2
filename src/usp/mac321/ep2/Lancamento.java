@@ -13,9 +13,9 @@ public class Lancamento {
 	double valor;
 	EstadoLancamento launchState;
 	LocalDate diaAtual = LocalDate.now();
+	LeitorFinancasPessoais leitor;
 
-
-	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor){
+	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, LeitorFinancasPessoais leitor){
 		data = new GregorianCalendar(ano, mes, ano);
 		this.user = user;
 		this.receitaOuDespesa = receitaOuDespesa;
@@ -24,7 +24,8 @@ public class Lancamento {
 		this.valor = valor;
 		identificador = contadorDeLancamentos;
 		contadorDeLancamentos++;
-		System.out.println("lancamento criado");
+		this.leitor = leitor;
+			
 	}
 	
 	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long indentificador){
@@ -40,7 +41,7 @@ public class Lancamento {
 			contadorDeLancamentos=identificador+1;
 		}
 		
-		System.out.println("lancamento criado");
+		
 	}
 
 	public void mudaEstado(EstadoLancamento el){
@@ -69,24 +70,26 @@ public class Lancamento {
 
 
 
-	
 
-	public void setUser(Usuario u) {
-        launchState.setUser(this, u);
+
+	public void setUser(Usuario user)  {
+		launchState.setUser(this, user, leitor);
+		this.user = user;
     }
 
     public void setData(int dia, int mes, int ano) {
-        launchState.setData(this, dia, mes, ano);
+        launchState.setData(this, dia, mes, ano, leitor);
 		data = new GregorianCalendar(ano, mes- 1, dia);
     }
 
-    public void setTipo(TipoOperacao t) {
-        launchState.setTipo(this, t);
-
-    }
+    public void setTipo(TipoOperacao tipo) {
+        launchState.setTipo(this, tipo, leitor);
+		this.tipo = tipo;
+	
+	}
 
     public void setValor(double valor) {
-        	launchState.setValor(this, valor);
+        	launchState.setValor(this, valor, leitor);
 			this.valor = valor;
     }
 
