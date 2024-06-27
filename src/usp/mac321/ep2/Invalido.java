@@ -3,8 +3,9 @@ import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
     public class Invalido implements EstadoLancamento {
+    
     @Override
-    public void setUser(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
+    public void setUsuario(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
         try {
             leitor.getUsuarioFromList(u.getApelido());
         }
@@ -61,5 +62,9 @@ import java.util.GregorianCalendar;
         } 
         
         
+    }
+
+    public String estado() {
+        return "Inválido";
     }
 }

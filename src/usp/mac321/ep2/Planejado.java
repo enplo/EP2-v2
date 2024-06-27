@@ -4,8 +4,13 @@ import java.util.GregorianCalendar;
 
 
 public class Planejado implements EstadoLancamento {
+    
+    
+    
+    
+    
     @Override
-    public void setUser(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
+    public void setUsuario(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
         try {
             leitor.getUsuarioFromList(u.getApelido());
         }
@@ -61,5 +66,9 @@ public class Planejado implements EstadoLancamento {
         } 
         
         
+    }
+
+    public String estado() {
+        return "Executado";
     }
 }

@@ -4,20 +4,20 @@ import java.time.LocalDate;
 
 public class Lancamento {
 	private static long contadorDeLancamentos;
-	long identificador;
-	GregorianCalendar data;
-	Usuario user;
-	boolean receitaOuDespesa; //True para despesa e false para receita
-	TipoOperacao tipo;
-	String descricao;
-	double valor;
-	EstadoLancamento launchState;
+	private long identificador;
+	private GregorianCalendar data;
+	private Usuario usuario;
+	private boolean receitaOuDespesa; //True para despesa e false para receita
+	private TipoOperacao tipo;
+	private String descricao;
+	private double valor;
+	private EstadoLancamento estado;
 	
-	LeitorFinancasPessoais leitor;
+	private LeitorFinancasPessoais leitor;
 
-	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, LeitorFinancasPessoais leitor){
+	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, LeitorFinancasPessoais leitor){
 		data = new GregorianCalendar(ano, mes, ano);
-		this.user = user;
+		this.usuario = usuario;
 		this.receitaOuDespesa = receitaOuDespesa;
 		this.tipo = tipo;
 		this.descricao = descricao;
@@ -28,9 +28,9 @@ public class Lancamento {
 			
 	}
 	
-	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long indentificador){
+	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long indentificador){
 		data = new GregorianCalendar(ano, mes, dia);
-		this.user = user;
+		this.usuario = usuario;
 		this.receitaOuDespesa = receitaOuDespesa;
 		this.tipo = tipo;
 		this.descricao = descricao;
@@ -45,9 +45,14 @@ public class Lancamento {
 	}
 
 	public void mudaEstado(EstadoLancamento el){
-		launchState = el;
+		estado = el;
 	}
 	
+	public String getEstado() {
+		return estado.estado();	
+	}
+
+
 	public long getID() {
 		return identificador;
 	}
@@ -60,8 +65,8 @@ public class Lancamento {
 		return valor;
 	}
 
-	public Usuario getUser() {
-		return user;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	public boolean isDespesa(){
@@ -74,25 +79,25 @@ public class Lancamento {
 	}
 
 
-	public void setUser(Usuario user) {
-		launchState.setUser(this, user, leitor);
+	public void setUsuario(Usuario usuario) {
+		estado.setUsuario(this, usuario, leitor);
 		
-			this.user = user;
+			this.usuario = usuario;
     }
 
     public void setData(int dia, int mes, int ano) {
-        launchState.setData(this, dia, mes, ano, leitor);
+        estado.setData(this, dia, mes, ano, leitor);
 		data = new GregorianCalendar(ano, mes- 1, dia);
     }
 
     public void setTipo(TipoOperacao tipo) {
-        launchState.setTipo(this, tipo, leitor);
+        estado.setTipo(this, tipo, leitor);
 		this.tipo = tipo;
 	
 	}
 
     public void setValor(double valor) {
-        	launchState.setValor(this, valor, leitor);
+        	estado.setValor(this, valor, leitor);
 			this.valor = valor;
     }
 

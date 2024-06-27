@@ -16,7 +16,10 @@ public class TestaLancamentos {
     LeitorFinancasPessoais leitor;
     
     @BeforeAll
-    public void setUp() {
+    void setUp() {
+        leitor.leUsuarios("csv/usuarios.csv");
+        leitor.leTiposDespesas("csv/tiposDespesas.csv");
+        leitor.leTiposReceitas("csv/tiposReceitas.csv");
         lancamento = leitor.leLancamentos("csv/lancamentos.csv").get(0);
     }
 
@@ -25,6 +28,39 @@ public class TestaLancamentos {
     public void testeGetters() {
         String saida = "ID: "+lancamento.getID() + "Descrição: "+lancamento.getDescricao() + "Valor: "+ lancamento.getValor() + " É despesa: " +lancamento.isDespesa();
         assertEquals(" ",saida);
-   
+        lancamento.setDescricao("Teste");
+        assertEquals("Teste", lancamento.getDescricao());
+        assertEquals("Executado", lancamento.getEstado());
     }
+
+    @Test
+    public void testeSetData() {
+        lancamento.setData(1, 0, 2100);
+        assertEquals("Planejado", lancamento.getEstado());
+    }
+
+    @Test
+    public void testeSetUsuario() {
+        Usuario u = new Usuario("Zezinho", "José Josimarson Eleutério");
+        lancamento.setUsuario(u);
+        assertEquals("Planejado", lancamento.getEstado());
+
+    }
+
+
+    @Test
+    public void setValor() {
+        lancamento.setValor(-950);
+        assertEquals("Inválida", lancamento.getEstado());
+    }
+
+    @Test
+    public void setTipo() {
+        TipoDespesa t = new TipoDespesa("abcd");
+        lancamento.setValor(1000);
+        lancamento.setTipo(t);
+        assertEquals("Inválida", lancamento.getEstado());
+    }
+
+
 }
