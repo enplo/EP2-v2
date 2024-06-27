@@ -1,24 +1,24 @@
 package usp.mac321.ep2;
 
-import java.util.List;
+import java.util.*;
 
 public class TipoReceita implements TipoOperacao {
 	String nomeDoTipo;
 	boolean sub;
 	TipoReceita tipoDerivado;
-	List<TipoReceita> subcategorias;
+	List<TipoReceita> subcategorias = new ArrayList<TipoReceita>();
 	boolean despesa = false;
 
 
 	TipoReceita(String n){
 		nomeDoTipo = n;
-		sub = false;
+		sub = true;
 	}
 	
 	TipoReceita(String n, List<TipoReceita> t){
 		nomeDoTipo = n;
 		subcategorias = t;
-		sub = true;
+		sub = false;
 	}
 	
 	TipoReceita(String n, boolean b){
@@ -65,13 +65,7 @@ public class TipoReceita implements TipoOperacao {
 		return despesa;
 	}
 
-	public List<TipoReceita> getSubcategorias() throws SubcategoriasInexistentesException{
-		try {
-			if(subcategorias.isEmpty()) throw new SubcategoriasInexistentesException(nomeDoTipo);
-		}
-		catch(Exception e) {
-			throw new SubcategoriasInexistentesException(nomeDoTipo);
-		}
+	public List<TipoReceita> getListaSubcategorias() {
 		return subcategorias;
 	}
 }
