@@ -12,7 +12,7 @@ public class Lancamento {
 	String descricao;
 	double valor;
 	EstadoLancamento launchState;
-	LocalDate diaAtual = LocalDate.now();
+	
 	LeitorFinancasPessoais leitor;
 
 	Lancamento(int dia, int mes, int ano, Usuario user, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, LeitorFinancasPessoais leitor){
@@ -69,12 +69,15 @@ public class Lancamento {
 	}
 
 
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 
-
-	public void setUser(Usuario user)  {
+	public void setUser(Usuario user) {
 		launchState.setUser(this, user, leitor);
-		this.user = user;
+		
+			this.user = user;
     }
 
     public void setData(int dia, int mes, int ano) {

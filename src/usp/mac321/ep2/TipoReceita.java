@@ -7,7 +7,9 @@ public class TipoReceita implements TipoOperacao {
 	boolean sub;
 	TipoReceita tipoDerivado;
 	List<TipoReceita> subcategorias;
-	
+	boolean despesa = false;
+
+
 	TipoReceita(String n){
 		nomeDoTipo = n;
 		sub = false;
@@ -57,6 +59,10 @@ public class TipoReceita implements TipoOperacao {
 	
 	public boolean isSub() {
 		return sub;
+	}
+
+	public boolean isDespesa() {
+		return despesa;
 	}
 
 	public List<TipoReceita> getSubcategorias() throws SubcategoriasInexistentesException{

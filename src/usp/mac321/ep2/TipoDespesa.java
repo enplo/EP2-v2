@@ -7,7 +7,9 @@ public class TipoDespesa implements TipoOperacao {
 	boolean sub;
 	TipoDespesa tipoDerivado;
 	List<TipoDespesa> subcategorias;
-	
+	boolean despesa = true;
+
+
 	TipoDespesa(String n){
 		nomeDoTipo = n;
 		sub = false;
@@ -46,6 +48,9 @@ public class TipoDespesa implements TipoOperacao {
 		return sc;
 	}
 	
+	public boolean isDespesa() {
+		return despesa;
+	}
 	
 	@Override
 	public String toString() {

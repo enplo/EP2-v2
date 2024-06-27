@@ -314,8 +314,27 @@ public class LeitorFinancasPessoais implements LeitorFinancasPessoaisDAO {
 		throw new TipoNaoRegistradoException(nome);
 	}
 	
+	public TipoDespesa getTipoDespesaFromList(String nome) throws TipoNaoRegistradoException {
+		for(TipoDespesa i: despesas) {
+			if(i.getNome().equals(nome)) {
+				return i;
+			}
+		}
+		throw new TipoNaoRegistradoException(nome);
+	}
+
+
 	public TipoReceita getTipoReceitaFromList(String nome, List<TipoReceita> l) throws TipoNaoRegistradoException {
 		for(TipoReceita i: l) {
+			if(i.getNome().equals(nome)) {
+				return i;
+			}
+		}
+		throw new TipoNaoRegistradoException(nome);
+	}
+
+	public TipoReceita getTipoReceitaFromList(String nome) throws TipoNaoRegistradoException {
+		for(TipoReceita i: receitas) {
 			if(i.getNome().equals(nome)) {
 				return i;
 			}
@@ -352,16 +371,5 @@ public class LeitorFinancasPessoais implements LeitorFinancasPessoaisDAO {
 			}
 		}}
 		throw new UsuarioNaoExistenteException(apelido);
-	}
-
-	
-
-	public static void main(String[] args) {
-		LeitorFinancasPessoais leitor = new LeitorFinancasPessoais();
-		List<Lancamento> lancamento = leitor.leLancamentos("csv/lancamentos.csv");;
-		for (Lancamento l: lancamento) {
-			System.out.println(l.getID());
-		}		
-
 	}
 }

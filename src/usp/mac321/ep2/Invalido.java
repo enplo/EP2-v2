@@ -5,7 +5,13 @@ import java.util.GregorianCalendar;
     public class Invalido implements EstadoLancamento {
     @Override
     public void setUser(Lancamento lancamento, Usuario u, LeitorFinancasPessoais leitor) {
-        lancamento.user = u;
+        try {
+            leitor.getUsuarioFromList(u.getApelido());
+        }
+
+        catch (UsuarioNaoExistenteException e){
+            //Como o estado já é inválido, não é necessário tomar mais nenhuma providência
+        }
     }
 
     @Override
@@ -21,21 +27,39 @@ import java.util.GregorianCalendar;
             LocalDate localDate = novaData.toZonedDateTime().toLocalDate();
             if (localDate.isBefore(dataAtual)) {
                 lancamento.mudaEstado(new Executado());
-            } else if (localDate.isAfter(dataAtual)) {
+            } 
+            
+            else if (localDate.isAfter(dataAtual)) {
                 lancamento.mudaEstado(new Planejado());
             }
 
-            lancamento.data = novaData;
+           
         }
     }
 
     @Override
     public void setTipo(Lancamento lancamento, TipoOperacao t, LeitorFinancasPessoais leitor) {
-        lancamento.tipo = t;
+        try {
+            if(t.isDespesa()) {
+                leitor.getTipoDespesaFromList(t.getNome());
+            }
+
+            else {
+                leitor.getTipoReceitaFromList(t.getNome()); 
+            }
+        }
+
+        catch(TipoNaoRegistradoException e) {
+           //Já está no estado inválido, nenhuma ação necessária
+        }
     }
 
     @Override
     public void setValor(Lancamento lancamento, double valor, LeitorFinancasPessoais leitor) {
-        lancamento.valor = valor;
+        if (valor < 0) {
+            lancamento.mudaEstado(new Invalido());
+        } 
+        
+        
     }
 }
