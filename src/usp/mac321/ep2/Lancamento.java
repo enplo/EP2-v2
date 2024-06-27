@@ -25,10 +25,10 @@ public class Lancamento {
 		identificador = contadorDeLancamentos;
 		contadorDeLancamentos++;
 		this.leitor = leitor;
-			
+				
 	}
 	
-	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long indentificador){
+	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long identificador){
 		data = new GregorianCalendar(ano, mes, dia);
 		this.usuario = usuario;
 		this.receitaOuDespesa = receitaOuDespesa;
@@ -58,7 +58,7 @@ public class Lancamento {
 	}
 
 	public String getDescricao() {
-		return this.descricao;
+		return descricao;
 	}
 
 	public double getValor() {

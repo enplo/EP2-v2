@@ -277,7 +277,7 @@ public class LeitorFinancasPessoais implements LeitorFinancasPessoaisDAO {
 					
 					if(identificador<=0) throw new ValorNegativoException(identificador);
 					for(Lancamento i: lancamentos) {
-						if(i.identificador==identificador) {
+						if(i.getID()==identificador) {
 							throw new IdentificadorRepetidoEmLancamentosException(identificador);
 						}
 					}
