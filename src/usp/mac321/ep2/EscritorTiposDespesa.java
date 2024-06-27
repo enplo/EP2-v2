@@ -5,14 +5,14 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class EscritorTiposReceita implements EscritorTiposReceitaDAO {
+public class EscritorTiposDespesa implements EscritorTiposDespesaDAO {
 	
 	@Override
-	public void escreveTiposReceita(List<TipoReceita> l, String nomeArquivoUsuarios) {
+	public void escreveTiposDespesa(List<TipoDespesa> l, String nomeArquivoUsuarios) {
 		try {
 			PrintWriter writer = new PrintWriter(nomeArquivoUsuarios, "UTF-8");
 			writer.println("Categoria,SubCategoria");
-			for(TipoReceita i: l) {
+			for(TipoDespesa i: l) {
 				if(!i.isSub()) {
 					for(int j = 0; j<i.getListaSubcategorias().size(); j++) {
 						writer.print(i.getNome());
