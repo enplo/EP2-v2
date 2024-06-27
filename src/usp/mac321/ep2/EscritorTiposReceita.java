@@ -11,20 +11,22 @@ public class EscritorTiposReceita implements EscritorTiposReceitaDAO {
 	public void escreveTiposReceita(List<TipoReceita> l, String nomeArquivoUsuarios) {
 		try {
 			PrintWriter writer = new PrintWriter(nomeArquivoUsuarios, "UTF-8");
-			writer.println("Categoria,SubCategoria");
 			for(TipoReceita i: l) {
 				if(!i.isSub()) {
-					for(int j = 0; j<i.getListaSubcategorias().size(); j++) {
-						writer.print(i.getNome());
-						writer.println("," + i.getListaSubcategorias().get(j).getNome());
+					try {
+						for(TipoReceita j: i.getSubcategorias()) {
+							writer.print(i.getNome());
+							writer.println("," + j.getNome());
+						}
+					} catch (SubcategoriasInexistentesException e) {
+						writer.println(i.getNome());
 					}
 				}
 			}
 			writer.close();
 		}
 		catch(FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			System.out.println("IOException2: " + e.getMessage());
+			System.out.println(e);
 		} 
 	}
 }

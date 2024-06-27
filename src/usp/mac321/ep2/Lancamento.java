@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Lancamento {
 	private static long contadorDeLancamentos;
 	private long identificador;
-	private int dia, mes, ano;
 	private GregorianCalendar data;
 	private Usuario usuario;
 	private boolean receitaOuDespesa; //True para despesa e false para receita
@@ -17,9 +16,6 @@ public class Lancamento {
 	private LeitorFinancasPessoais leitor;
 
 	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, LeitorFinancasPessoais leitor){
-		this.dia = dia;
-		this.mes = mes;
-		this.ano = ano;
 		data = new GregorianCalendar(ano, mes, ano);
 		this.usuario = usuario;
 		this.receitaOuDespesa = receitaOuDespesa;
@@ -33,9 +29,6 @@ public class Lancamento {
 	}
 	
 	Lancamento(int dia, int mes, int ano, Usuario usuario, boolean receitaOuDespesa, TipoOperacao tipo, String descricao, double valor, long identificador){
-		this.dia = dia;
-		this.mes = mes;
-		this.ano = ano;
 		data = new GregorianCalendar(ano, mes, dia);
 		this.usuario = usuario;
 		this.receitaOuDespesa = receitaOuDespesa;
@@ -83,24 +76,6 @@ public class Lancamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public String getStringData() {
-		String sDia = "" + dia;
-		if(dia<10) {
-			sDia = "0" + sDia;
-		}
-		
-		String sMes = "" + mes;
-		if(mes<10) {
-			sMes = "0" + sMes;
-		}
-		
-		String sAno = "" + ano;
-		if(ano<10) {
-			sAno = "0" + sAno;
-		}
-		return sDia+"/"+sMes+"/"+sAno;
 	}
 
 
